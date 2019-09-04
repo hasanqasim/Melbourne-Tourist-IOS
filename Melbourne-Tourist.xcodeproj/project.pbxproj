@@ -20,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A61BFE03232014E3000A683B /* mcg.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = mcg.gpx; path = ../../../Downloads/mcg.gpx; sourceTree = "<group>"; };
+		A61BFE05232015E9000A683B /* tram museum.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "tram museum.gpx"; path = "../../../Downloads/tram museum.gpx"; sourceTree = "<group>"; };
+		A61BFE06232016F8000A683B /* stkildapier.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = stkildapier.gpx; path = ../../../Downloads/stkildapier.gpx; sourceTree = "<group>"; };
 		A664F988231CFC7100F6AF3D /* NewLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocationDelegate.swift; sourceTree = "<group>"; };
 		BB344A33230FAD6D00769AB4 /* Melbourne-Tourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Melbourne-Tourist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB344A36230FAD6D00769AB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +51,9 @@
 		BB344A2A230FAD6D00769AB4 = {
 			isa = PBXGroup;
 			children = (
+				A61BFE06232016F8000A683B /* stkildapier.gpx */,
+				A61BFE05232015E9000A683B /* tram museum.gpx */,
+				A61BFE03232014E3000A683B /* mcg.gpx */,
 				BB344A35230FAD6D00769AB4 /* Melbourne-Tourist */,
 				BB344A34230FAD6D00769AB4 /* Products */,
 			);

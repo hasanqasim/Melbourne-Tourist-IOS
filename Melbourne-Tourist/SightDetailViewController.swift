@@ -25,14 +25,33 @@ class SightDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         navigationItem.title = sight?.title
-        if let image = sight?.image {
-            imageView.image =  UIImage(named: image)
+        if let image = sight?.imageName {
+            if image.count != 36 {
+                imageView.image =  UIImage(named: image)
+            } else {
+                imageView.image = loadImageData(fileName: image)
+                
+            }
         }
         if let subtitle = sight?.subtitle {
             address += "\(subtitle)\n"
         }
         
         reverseGeocode()
+    }
+    
+    func loadImageData(fileName: String) -> UIImage? {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        var image: UIImage?
+        if let pathComponent = url.appendingPathComponent(fileName) {
+            let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            let fileData = fileManager.contents(atPath: filePath)
+            image = UIImage(data: fileData!)
+        }
+        return image
+        
     }
     
     func reverseGeocode() {

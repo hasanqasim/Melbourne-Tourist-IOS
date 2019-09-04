@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class AddSightViewController: UIViewController {
+class AddSightViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var sightName: UITextField!
     @IBOutlet weak var sightDescription: UITextField!
@@ -17,6 +17,7 @@ class AddSightViewController: UIViewController {
     @IBOutlet weak var iconSegmentedControl: UISegmentedControl!
     @IBOutlet weak var mapView: MKMapView!
     
+    var imageName = ""
     var delegate: NewLocationDelegate?
     var newSightCoordinates = CLLocationCoordinate2D(latitude: 0, longitude: 0)
 
@@ -26,7 +27,48 @@ class AddSightViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func takePhoto(_ sender: Any) {
+        let picker = UIImagePickerController()
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            picker.sourceType = .camera
+        } else {
+            picker.sourceType = .photoLibrary
+        }
+        picker.allowsEditing = false
+        // we tell this view controller that we want our clas to be its delegate
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        //extract image from dictionary that is passed as a parameter
+        guard let image = info[.originalImage] as? UIImage else {
+            displayMessage(title: "Error", message: "Cannot save until a photo has been taken!")
+            return
+        }
+        
+        //Generate a unique filename for the image we import using UUID.
+        imageName = UUID().uuidString
+        
+        //convert image to JPEG, then write that JPEG to disk
+        let jpegData = image.jpegData(compressionQuality: 0.8)
+        
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        
+        if let pathComponent = url.appendingPathComponent("\(imageName)") {
+            let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            fileManager.createFile(atPath: filePath, contents: jpegData, attributes: nil)
+        }
+        
+        //dismiss the view controller
+        dismiss(animated: true)
+        displayMessage(title: "Success", message: "Image Capture Successful!")
+    }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -42,9 +84,9 @@ class AddSightViewController: UIViewController {
         
     }
     @IBAction func addSight(_ sender: Any) {
-        if sightName.text != "" && sightDescription.text != "" && sightAddress.text != ""{
-            let nameRegex = "[a-zA-z ]+"
-            let descriptionRegex = "[a-zA-z.!, ]+"
+        if sightName.text!.count != 0 && sightDescription.text!.count != 0 && sightAddress.text!.count != 0 && imageName != ""{
+            let nameRegex = "^[a-zA-Z]+( [a-zA-Z]+)*$"
+            let descriptionRegex = "^[a-zA-Z]+( [a-zA-Z]+[.!,]?)*$"
             let nameTest = NSPredicate(format:"SELF MATCHES %@", nameRegex)
             let descriptionTest = NSPredicate(format:"SELF MATCHES %@", descriptionRegex)
             let address = sightAddress.text!
@@ -52,8 +94,9 @@ class AddSightViewController: UIViewController {
             
             if nameTest.evaluate(with: sightName.text) && descriptionTest.evaluate(with: sightDescription.text) && newSightCoordinates.latitude != 0 {
                 let name = sightName.text!
-                let description = sightName.text!
-                let sight = SightAnnotation(title: name, subtitle: description, lat: newSightCoordinates.latitude, long: newSightCoordinates.longitude, image: "stkilda")
+                let description = sightDescription.text!
+                let iconType = iconSegmentedControl.titleForSegment(at: iconSegmentedControl.selectedSegmentIndex)!
+                let sight = SightAnnotation(title: name, subtitle: description, lat: newSightCoordinates.latitude, long: newSightCoordinates.longitude, iconType: iconType, imageName: imageName)
                 delegate!.sightAnnotationAdded(annotation: sight)
                 navigationController?.popViewController(animated: true)
                 
@@ -61,24 +104,28 @@ class AddSightViewController: UIViewController {
            
         }
         
-        if sightName.text == "" {
+        if sightName.text!.isEmpty {
             displayMessage(title: "Error", message: "Must provide a Name!")
         }
         
-        if !NSPredicate(format:"SELF MATCHES %@", "[a-zA-z ]+").evaluate(with: sightName.text) {
+        if !NSPredicate(format:"SELF MATCHES %@", "^[a-zA-Z]+( [a-zA-Z]+)*$").evaluate(with: sightName.text) {
             displayMessage(title: "Error", message: "Must provide a Valid Name")
         }
         
-        if sightDescription.text == "" {
+        if sightDescription.text!.isEmpty {
             displayMessage(title: "Error", message: "Must provide a Description!")
         }
         
-        if !NSPredicate(format:"SELF MATCHES %@", "[a-zA-z.!, ]+").evaluate(with: sightDescription.text) {
+        if !NSPredicate(format:"SELF MATCHES %@", "^[a-zA-Z]+( [a-zA-Z]+[.,!]?)*$").evaluate(with: sightDescription.text) {
             displayMessage(title: "Error", message: "Must provide a Valid Description")
         }
             
-        if sightAddress.text == "" {
+        if sightAddress.text!.isEmpty {
              displayMessage(title: "Error", message: "Must provide a Street Address!")
+        }
+        
+        if imageName == "" {
+            displayMessage(title: "Error", message: "Must provide an Image")
         }
 
        
@@ -93,7 +140,7 @@ class AddSightViewController: UIViewController {
                     let sight = MKPointAnnotation()
                     sight.coordinate = CLLocationCoordinate2D(latitude: round(10000*location.coordinate.latitude)/10000, longitude: round(10000*location.coordinate.longitude)/10000)
                     self.mapView.addAnnotation(sight)
-                    let zoomRegion = MKCoordinateRegion(center: sight.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+                    let zoomRegion = MKCoordinateRegion(center: sight.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
                     self.mapView.setRegion(self.mapView.regionThatFits(zoomRegion), animated: true)
                     return
                 }

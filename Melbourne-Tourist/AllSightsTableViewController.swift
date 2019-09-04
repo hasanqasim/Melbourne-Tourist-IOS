@@ -88,6 +88,7 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
         if editingStyle == .delete {
             // Delete the row from the data source
             allSights.remove(at: indexPath.row)
+            filteredSights = allSights
             tableView.deleteRows(at: [indexPath], with: .fade)
         }/*
         else if editingStyle == .insert {

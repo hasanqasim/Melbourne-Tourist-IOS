@@ -13,13 +13,15 @@ class SightAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
-    var image: String
+    var iconType: String
+    var imageName: String
     
-    init(title: String, subtitle: String, lat: Double, long: Double, image: String) {
+    init(title: String, subtitle: String, lat: Double, long: Double, iconType: String, imageName: String) {
         self.title = title
         self.subtitle = subtitle
         coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        self.image = image
+        self.iconType = iconType
+        self.imageName = imageName
     }
 
 }

@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Melbourne-Tourist/HomeViewController.swift"
-            timestampString = "589120847.463412"
+            filePath = "Melbourne-Tourist/SightDetailViewController.swift"
+            timestampString = "589305863.2695071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "sightAnnotationAdded(annotation:)"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "loadImageData(fileName:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
