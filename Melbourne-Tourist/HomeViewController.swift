@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, NewLocationDelegate {
+class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, NewLocationDelegate, FocusOnAnnotationDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -33,6 +33,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         locationManager.requestAlwaysAuthorization()
         startMonitoringForGeofence()
     }
+    
     
     func startMonitoringForGeofence() {
         for location in sightList {
@@ -70,7 +71,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     }
     
     func focusOn(annotation: MKAnnotation) {
-        mapView.selectAnnotation(annotation, animated: true) // Selects the specified annotation and displays a callout view for it
+        //mapView.selectAnnotation(annotation, animated: true) // Selects the specified annotation and displays a callout view for it
         // A rectangular geographic region centered around a specefic latitude and longitude
         let zoomRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         // Changes the current visible region
@@ -123,6 +124,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         if segue.identifier == "viewAllSightsSegue" {
             let destination = segue.destination as! AllSightsTableViewController
             destination.allSights = sightList
+            destination.focusOnDelegate = self
         }
         
         if segue.identifier == "sightDetailViewSegue" {
@@ -134,6 +136,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         if segue.identifier == "addNewSightSegue" {
             let controller = segue.destination as! AddSightViewController
             controller.delegate = self
+            controller.focusOnAnnotationDelegate = self
         }
     }
     

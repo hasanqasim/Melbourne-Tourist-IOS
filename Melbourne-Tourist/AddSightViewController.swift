@@ -20,6 +20,7 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
     var imageName = ""
     var delegate: NewLocationDelegate?
     var newSightCoordinates = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    var focusOnAnnotationDelegate: FocusOnAnnotationDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,6 +100,7 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
                 let sight = SightAnnotation(title: name, subtitle: description, lat: newSightCoordinates.latitude, long: newSightCoordinates.longitude, iconType: iconType, imageName: imageName)
                 delegate!.sightAnnotationAdded(annotation: sight)
                 navigationController?.popViewController(animated: true)
+                focusOnAnnotationDelegate?.focusOn(annotation: sight)
                 
             }
            

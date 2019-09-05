@@ -18,7 +18,8 @@ class SightDetailViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
     
-    var address = ""
+    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var locationTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,24 +35,11 @@ class SightDetailViewController: UIViewController {
             }
         }
         if let subtitle = sight?.subtitle {
-            address += "\(subtitle)\n"
+            textView.text = "\(subtitle)"
         }
         
         reverseGeocode()
-    }
-    
-    func loadImageData(fileName: String) -> UIImage? {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        let url = NSURL(fileURLWithPath: path)
-        var image: UIImage?
-        if let pathComponent = url.appendingPathComponent(fileName) {
-            let filePath = pathComponent.path
-            let fileManager = FileManager.default
-            let fileData = fileManager.contents(atPath: filePath)
-            image = UIImage(data: fileData!)
-        }
-        return image
-        
+        iconImageView.image =  UIImage(named: "place-marker")
     }
     
     func reverseGeocode() {
@@ -67,21 +55,21 @@ class SightDetailViewController: UIViewController {
                         address += "name: \(name)  "
                     }
                     */
-                    self.address += "\nAddress: "
+                    var address = ""
                     if let subThoroughfare = currentSight.subThoroughfare {
-                        self.address += "\(subThoroughfare) "
+                        address += "\(subThoroughfare) "
                     }
                     if let thoroughfare = currentSight.thoroughfare {
-                        self.address += "\(thoroughfare) "
+                        address += "\(thoroughfare) "
                     }
                     if let subLocality = currentSight.subLocality {
-                        self.address += " \(subLocality) "
+                        address += " \(subLocality) "
                     }
                     if let subAdministrativeArea = currentSight.subAdministrativeArea {
-                        self.address += "\(subAdministrativeArea) "
+                        address += "\(subAdministrativeArea) "
                     }
                     if let administrativeArea = currentSight.administrativeArea {
-                        self.address += "\(administrativeArea)  "
+                        address += "\(administrativeArea)  "
                     }
                     /*
                     if let locality = currentSight.locality {
@@ -90,7 +78,7 @@ class SightDetailViewController: UIViewController {
                     */
                    
                     
-                    self.textView.text = self.address
+                    self.locationTextView.text = address
                 }
             }
         }

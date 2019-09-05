@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A61BFE0A2320A46C000A683B /* FocusOnAnnotationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE092320A46C000A683B /* FocusOnAnnotationDelegate.swift */; };
 		A664F989231CFC7100F6AF3D /* NewLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A664F988231CFC7100F6AF3D /* NewLocationDelegate.swift */; };
 		BB344A37230FAD6D00769AB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB344A36230FAD6D00769AB4 /* AppDelegate.swift */; };
 		BB344A3C230FAD6D00769AB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB344A3A230FAD6D00769AB4 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		A61BFE03232014E3000A683B /* mcg.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = mcg.gpx; path = ../../../Downloads/mcg.gpx; sourceTree = "<group>"; };
 		A61BFE05232015E9000A683B /* tram museum.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "tram museum.gpx"; path = "../../../Downloads/tram museum.gpx"; sourceTree = "<group>"; };
 		A61BFE06232016F8000A683B /* stkildapier.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = stkildapier.gpx; path = ../../../Downloads/stkildapier.gpx; sourceTree = "<group>"; };
+		A61BFE092320A46C000A683B /* FocusOnAnnotationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusOnAnnotationDelegate.swift; sourceTree = "<group>"; };
 		A664F988231CFC7100F6AF3D /* NewLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocationDelegate.swift; sourceTree = "<group>"; };
 		BB344A33230FAD6D00769AB4 /* Melbourne-Tourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Melbourne-Tourist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB344A36230FAD6D00769AB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				A664F988231CFC7100F6AF3D /* NewLocationDelegate.swift */,
 				BBB43E0523117DBE007AAFFD /* SightDetailViewController.swift */,
 				BB344A4A230FB2E300769AB4 /* HomeViewController.swift */,
+				A61BFE092320A46C000A683B /* FocusOnAnnotationDelegate.swift */,
 				BB344A4C230FBB8F00769AB4 /* AllSightsTableViewController.swift */,
 				BB344A3D230FAD6F00769AB4 /* Assets.xcassets */,
 				BB344A3F230FAD6F00769AB4 /* LaunchScreen.storyboard */,
@@ -161,6 +164,7 @@
 				A664F989231CFC7100F6AF3D /* NewLocationDelegate.swift in Sources */,
 				BBB43E08231187F8007AAFFD /* AddSightViewController.swift in Sources */,
 				BB344A4B230FB2E300769AB4 /* HomeViewController.swift in Sources */,
+				A61BFE0A2320A46C000A683B /* FocusOnAnnotationDelegate.swift in Sources */,
 				BB344A4D230FBB8F00769AB4 /* AllSightsTableViewController.swift in Sources */,
 				BBB43E0623117DBE007AAFFD /* SightDetailViewController.swift in Sources */,
 			);

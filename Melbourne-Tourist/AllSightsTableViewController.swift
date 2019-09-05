@@ -13,6 +13,7 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
     //var homeViewController: HomeViewController?
     var allSights = [SightAnnotation]()
     var filteredSights = [SightAnnotation]()
+    var focusOnDelegate: FocusOnAnnotationDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,19 +59,28 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
         
         cell.textLabel!.text = sight.title
         cell.detailTextLabel!.text = sight.subtitle
+        let cellViewImage: UIImage
+        let imageName = sight.imageName
+        if imageName.count != 36 {
+            cellViewImage =  UIImage(named: imageName)!
+        } else {
+            cellViewImage = loadImageData(fileName: imageName)!
+            }
+        let size = CGSize(width: 100, height: 50)
+        UIGraphicsBeginImageContext(size)
+        cellViewImage.draw(in: CGRect(x:0, y:0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        cell.imageView?.image = resizedImage
 
         return cell
     }
     
-    /*
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //navigationController?.pushViewController(homeViewController, animated: true)
-        //let mainStoryBoard = UIStoryboard.init(name: "Main", bundle: nil)
-        //let homeViewController = mainStoryBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        //_ = homeViewController.view
-        HomeViewController().focusOn(annotation: self.sights[indexPath.row])
+        navigationController?.popViewController(animated: true)
+        focusOnDelegate?.focusOn(annotation: filteredSights[indexPath.row])
     }
-     */
+    
     
     
 
@@ -97,6 +107,8 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
          */
     }
     
+  
+    
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
@@ -115,7 +127,7 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
     
     // MARK: - Navigation
 
-    
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "focusOnSightSegue" {
@@ -126,8 +138,22 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
             controller.annotation = self.filteredSights[selectionIndexPath!.row]
         }
     }
+     */
     
     
     
 
+}
+
+func loadImageData(fileName: String) -> UIImage? {
+    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+    let url = NSURL(fileURLWithPath: path)
+    var image: UIImage?
+    if let pathComponent = url.appendingPathComponent(fileName) {
+        let filePath = pathComponent.path
+        let fileManager = FileManager.default
+        let fileData = fileManager.contents(atPath: filePath)
+        image = UIImage(data: fileData!)
+    }
+    return image
 }
