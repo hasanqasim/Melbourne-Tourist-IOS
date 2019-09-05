@@ -18,14 +18,16 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var mapView: MKMapView!
     
     var imageName = ""
-    var delegate: NewLocationDelegate?
+    weak var databaseController: DatabaseProtocol?
     var newSightCoordinates = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var focusOnAnnotationDelegate: FocusOnAnnotationDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Get the database controller once from the App Delegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
     }
     
     @IBAction func takePhoto(_ sender: Any) {
@@ -97,8 +99,7 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
                 let name = sightName.text!
                 let description = sightDescription.text!
                 let iconType = iconSegmentedControl.titleForSegment(at: iconSegmentedControl.selectedSegmentIndex)!
-                let sight = SightAnnotation(title: name, subtitle: description, lat: newSightCoordinates.latitude, long: newSightCoordinates.longitude, iconType: iconType, imageName: imageName)
-                delegate!.sightAnnotationAdded(annotation: sight)
+                let sight = databaseController!.addSightAnnotation(title: name, subtitle: description, latitude: newSightCoordinates.latitude, longitude: newSightCoordinates.longitude, iconType: iconType, imageName: imageName)
                 navigationController?.popViewController(animated: true)
                 focusOnAnnotationDelegate?.focusOn(annotation: sight)
                 
