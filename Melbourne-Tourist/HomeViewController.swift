@@ -43,11 +43,13 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         }
     }
     
+    /*
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         let alert = UIAlertController(title: "Movement Detected!", message: "You have entered \(region.identifier)'s geofence", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+     */
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
