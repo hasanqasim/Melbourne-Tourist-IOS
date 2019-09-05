@@ -12,6 +12,8 @@
 		A61BFE622321BC82000A683B /* SightAnnotation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE602321BC82000A683B /* SightAnnotation+CoreDataClass.swift */; };
 		A61BFE632321BC82000A683B /* SightAnnotation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE612321BC82000A683B /* SightAnnotation+CoreDataProperties.swift */; };
 		A61BFE662321BDAF000A683B /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE652321BDAF000A683B /* DatabaseProtocol.swift */; };
+		A61BFE682321BE98000A683B /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE672321BE98000A683B /* CoreDataController.swift */; };
+		A61BFE6A2321BF26000A683B /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE692321BF26000A683B /* MulticastDelegate.swift */; };
 		A664F989231CFC7100F6AF3D /* NewLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A664F988231CFC7100F6AF3D /* NewLocationDelegate.swift */; };
 		BB344A37230FAD6D00769AB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB344A36230FAD6D00769AB4 /* AppDelegate.swift */; };
 		BB344A3C230FAD6D00769AB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB344A3A230FAD6D00769AB4 /* Main.storyboard */; };
@@ -32,6 +34,8 @@
 		A61BFE602321BC82000A683B /* SightAnnotation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SightAnnotation+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A61BFE612321BC82000A683B /* SightAnnotation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SightAnnotation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A61BFE652321BDAF000A683B /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
+		A61BFE672321BE98000A683B /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		A61BFE692321BF26000A683B /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		A664F988231CFC7100F6AF3D /* NewLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocationDelegate.swift; sourceTree = "<group>"; };
 		BB344A33230FAD6D00769AB4 /* Melbourne-Tourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Melbourne-Tourist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB344A36230FAD6D00769AB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				A61BFE652321BDAF000A683B /* DatabaseProtocol.swift */,
+				A61BFE672321BE98000A683B /* CoreDataController.swift */,
+				A61BFE692321BF26000A683B /* MulticastDelegate.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -186,11 +192,13 @@
 			files = (
 				BB344A37230FAD6D00769AB4 /* AppDelegate.swift in Sources */,
 				A664F989231CFC7100F6AF3D /* NewLocationDelegate.swift in Sources */,
+				A61BFE682321BE98000A683B /* CoreDataController.swift in Sources */,
 				BBB43E08231187F8007AAFFD /* AddSightViewController.swift in Sources */,
 				A61BFE622321BC82000A683B /* SightAnnotation+CoreDataClass.swift in Sources */,
 				BB344A4B230FB2E300769AB4 /* HomeViewController.swift in Sources */,
 				A61BFE662321BDAF000A683B /* DatabaseProtocol.swift in Sources */,
 				A61BFE0A2320A46C000A683B /* FocusOnAnnotationDelegate.swift in Sources */,
+				A61BFE6A2321BF26000A683B /* MulticastDelegate.swift in Sources */,
 				BB344A4D230FBB8F00769AB4 /* AllSightsTableViewController.swift in Sources */,
 				A61BFE5F2321BAF9000A683B /* MelbourneTourist.xcdatamodeld in Sources */,
 				A61BFE632321BC82000A683B /* SightAnnotation+CoreDataProperties.swift in Sources */,

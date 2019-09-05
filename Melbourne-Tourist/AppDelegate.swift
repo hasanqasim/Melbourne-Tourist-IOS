@@ -14,6 +14,7 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var databaseController: DatabaseProtocol?
     let locationManager = CLLocationManager()
 
 
@@ -25,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         uiNavbarProxy.barTintColor = UIColor(red: 0.7, green: 0.2, blue: 0.31, alpha: 1.0)
         uiNavbarProxy.tintColor = UIColor.white
         uiNavbarProxy.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        
+        //coredata
+        databaseController = CoreDataController()
         
         //geofence Code
         locationManager.delegate = self
