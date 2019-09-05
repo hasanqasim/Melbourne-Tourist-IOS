@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		A61BFE0A2320A46C000A683B /* FocusOnAnnotationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE092320A46C000A683B /* FocusOnAnnotationDelegate.swift */; };
+		A61BFE5F2321BAF9000A683B /* MelbourneTourist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE5D2321BAF9000A683B /* MelbourneTourist.xcdatamodeld */; };
+		A61BFE622321BC82000A683B /* SightAnnotation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE602321BC82000A683B /* SightAnnotation+CoreDataClass.swift */; };
+		A61BFE632321BC82000A683B /* SightAnnotation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE612321BC82000A683B /* SightAnnotation+CoreDataProperties.swift */; };
+		A61BFE662321BDAF000A683B /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE652321BDAF000A683B /* DatabaseProtocol.swift */; };
 		A664F989231CFC7100F6AF3D /* NewLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A664F988231CFC7100F6AF3D /* NewLocationDelegate.swift */; };
 		BB344A37230FAD6D00769AB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB344A36230FAD6D00769AB4 /* AppDelegate.swift */; };
 		BB344A3C230FAD6D00769AB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB344A3A230FAD6D00769AB4 /* Main.storyboard */; };
 		BB344A3E230FAD6F00769AB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB344A3D230FAD6F00769AB4 /* Assets.xcassets */; };
 		BB344A41230FAD6F00769AB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB344A3F230FAD6F00769AB4 /* LaunchScreen.storyboard */; };
-		BB344A49230FB21600769AB4 /* SightAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB344A48230FB21600769AB4 /* SightAnnotation.swift */; };
 		BB344A4B230FB2E300769AB4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB344A4A230FB2E300769AB4 /* HomeViewController.swift */; };
 		BB344A4D230FBB8F00769AB4 /* AllSightsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB344A4C230FBB8F00769AB4 /* AllSightsTableViewController.swift */; };
 		BBB43E0623117DBE007AAFFD /* SightDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB43E0523117DBE007AAFFD /* SightDetailViewController.swift */; };
@@ -25,6 +28,10 @@
 		A61BFE05232015E9000A683B /* tram museum.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "tram museum.gpx"; path = "../../../Downloads/tram museum.gpx"; sourceTree = "<group>"; };
 		A61BFE06232016F8000A683B /* stkildapier.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = stkildapier.gpx; path = ../../../Downloads/stkildapier.gpx; sourceTree = "<group>"; };
 		A61BFE092320A46C000A683B /* FocusOnAnnotationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusOnAnnotationDelegate.swift; sourceTree = "<group>"; };
+		A61BFE5E2321BAF9000A683B /* MelbourneTourist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MelbourneTourist.xcdatamodel; sourceTree = "<group>"; };
+		A61BFE602321BC82000A683B /* SightAnnotation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SightAnnotation+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A61BFE612321BC82000A683B /* SightAnnotation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SightAnnotation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A61BFE652321BDAF000A683B /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		A664F988231CFC7100F6AF3D /* NewLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocationDelegate.swift; sourceTree = "<group>"; };
 		BB344A33230FAD6D00769AB4 /* Melbourne-Tourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Melbourne-Tourist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB344A36230FAD6D00769AB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -32,7 +39,6 @@
 		BB344A3D230FAD6F00769AB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB344A40230FAD6F00769AB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB344A42230FAD6F00769AB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BB344A48230FB21600769AB4 /* SightAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SightAnnotation.swift; sourceTree = "<group>"; };
 		BB344A4A230FB2E300769AB4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BB344A4C230FBB8F00769AB4 /* AllSightsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSightsTableViewController.swift; sourceTree = "<group>"; };
 		BBB43E0523117DBE007AAFFD /* SightDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SightDetailViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +56,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A61BFE5C2321BAA4000A683B /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				A61BFE602321BC82000A683B /* SightAnnotation+CoreDataClass.swift */,
+				A61BFE612321BC82000A683B /* SightAnnotation+CoreDataProperties.swift */,
+				A61BFE5D2321BAF9000A683B /* MelbourneTourist.xcdatamodeld */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		A61BFE642321BD62000A683B /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				A61BFE652321BDAF000A683B /* DatabaseProtocol.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		BB344A2A230FAD6D00769AB4 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +96,8 @@
 		BB344A35230FAD6D00769AB4 /* Melbourne-Tourist */ = {
 			isa = PBXGroup;
 			children = (
+				A61BFE642321BD62000A683B /* Database */,
+				A61BFE5C2321BAA4000A683B /* DataModel */,
 				BB344A36230FAD6D00769AB4 /* AppDelegate.swift */,
 				BB344A3A230FAD6D00769AB4 /* Main.storyboard */,
 				BBB43E07231187F8007AAFFD /* AddSightViewController.swift */,
@@ -83,7 +109,6 @@
 				BB344A3D230FAD6F00769AB4 /* Assets.xcassets */,
 				BB344A3F230FAD6F00769AB4 /* LaunchScreen.storyboard */,
 				BB344A42230FAD6F00769AB4 /* Info.plist */,
-				BB344A48230FB21600769AB4 /* SightAnnotation.swift */,
 			);
 			path = "Melbourne-Tourist";
 			sourceTree = "<group>";
@@ -159,13 +184,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB344A49230FB21600769AB4 /* SightAnnotation.swift in Sources */,
 				BB344A37230FAD6D00769AB4 /* AppDelegate.swift in Sources */,
 				A664F989231CFC7100F6AF3D /* NewLocationDelegate.swift in Sources */,
 				BBB43E08231187F8007AAFFD /* AddSightViewController.swift in Sources */,
+				A61BFE622321BC82000A683B /* SightAnnotation+CoreDataClass.swift in Sources */,
 				BB344A4B230FB2E300769AB4 /* HomeViewController.swift in Sources */,
+				A61BFE662321BDAF000A683B /* DatabaseProtocol.swift in Sources */,
 				A61BFE0A2320A46C000A683B /* FocusOnAnnotationDelegate.swift in Sources */,
 				BB344A4D230FBB8F00769AB4 /* AllSightsTableViewController.swift in Sources */,
+				A61BFE5F2321BAF9000A683B /* MelbourneTourist.xcdatamodeld in Sources */,
+				A61BFE632321BC82000A683B /* SightAnnotation+CoreDataProperties.swift in Sources */,
 				BBB43E0623117DBE007AAFFD /* SightDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +394,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A61BFE5D2321BAF9000A683B /* MelbourneTourist.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A61BFE5E2321BAF9000A683B /* MelbourneTourist.xcdatamodel */,
+			);
+			currentVersion = A61BFE5E2321BAF9000A683B /* MelbourneTourist.xcdatamodel */;
+			path = MelbourneTourist.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BB344A2B230FAD6D00769AB4 /* Project object */;
 }
