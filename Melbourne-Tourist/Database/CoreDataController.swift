@@ -93,6 +93,10 @@ class CoreDataController: NSObject, NSFetchedResultsControllerDelegate, Database
         return sights
     }
     
+    func saveEditSightChanges() {
+        saveContext()
+    }
+    
     func createDefaultEntries() {
         let _ = addSightAnnotation(title: "Old Treasury Building", subtitle: "Finest public building in Australia", latitude: -37.8132, longitude: 144.9744, iconType: "Building", imageName: "oldtreasury")
         let _ = addSightAnnotation(title: "Abbotsford Convent", subtitle: "Australia’s largest multi-arts precinct. ", latitude: -37.8026, longitude: 145.0044, iconType: "Museum", imageName: "abbotsford")

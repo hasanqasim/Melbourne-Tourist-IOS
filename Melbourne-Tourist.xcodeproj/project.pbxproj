@@ -15,6 +15,7 @@
 		A61BFE682321BE98000A683B /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE672321BE98000A683B /* CoreDataController.swift */; };
 		A61BFE6A2321BF26000A683B /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE692321BF26000A683B /* MulticastDelegate.swift */; };
 		A61BFE6C23221F3D000A683B /* RegionMonitoringDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BFE6B23221F3D000A683B /* RegionMonitoringDelegate.swift */; };
+		A68EEEBB23226AD100A39C91 /* EditSightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68EEEBA23226AD100A39C91 /* EditSightViewController.swift */; };
 		BB344A37230FAD6D00769AB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB344A36230FAD6D00769AB4 /* AppDelegate.swift */; };
 		BB344A3C230FAD6D00769AB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB344A3A230FAD6D00769AB4 /* Main.storyboard */; };
 		BB344A3E230FAD6F00769AB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB344A3D230FAD6F00769AB4 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 		A61BFE692321BF26000A683B /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		A61BFE6B23221F3D000A683B /* RegionMonitoringDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionMonitoringDelegate.swift; sourceTree = "<group>"; };
 		A61BFE6D2322260E000A683B /* NGV.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = NGV.gpx; path = ../../../Downloads/NGV.gpx; sourceTree = "<group>"; };
+		A68EEEBA23226AD100A39C91 /* EditSightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSightViewController.swift; sourceTree = "<group>"; };
 		BB344A33230FAD6D00769AB4 /* Melbourne-Tourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Melbourne-Tourist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB344A36230FAD6D00769AB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB344A3B230FAD6D00769AB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				A61BFE5C2321BAA4000A683B /* DataModel */,
 				BB344A36230FAD6D00769AB4 /* AppDelegate.swift */,
 				BB344A3A230FAD6D00769AB4 /* Main.storyboard */,
+				A68EEEBA23226AD100A39C91 /* EditSightViewController.swift */,
 				BBB43E07231187F8007AAFFD /* AddSightViewController.swift */,
 				A61BFE6B23221F3D000A683B /* RegionMonitoringDelegate.swift */,
 				BBB43E0523117DBE007AAFFD /* SightDetailViewController.swift */,
@@ -204,6 +207,7 @@
 				BB344A4D230FBB8F00769AB4 /* AllSightsTableViewController.swift in Sources */,
 				A61BFE5F2321BAF9000A683B /* MelbourneTourist.xcdatamodeld in Sources */,
 				A61BFE632321BC82000A683B /* SightAnnotation+CoreDataProperties.swift in Sources */,
+				A68EEEBB23226AD100A39C91 /* EditSightViewController.swift in Sources */,
 				BBB43E0623117DBE007AAFFD /* SightDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

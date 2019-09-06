@@ -23,5 +23,6 @@ protocol DatabaseProtocol: AnyObject {
     func deleteSightAnnotation(sight: SightAnnotation)
     func addListener(listener: DatabaseListener)
     func removeListener(listener: DatabaseListener)
+    func saveEditSightChanges()
 }
 
