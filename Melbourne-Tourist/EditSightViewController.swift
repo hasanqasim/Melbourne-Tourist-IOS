@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+// most of the code in this view controller is from other view controllers where references have been sighted.
 class EditSightViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var sightForEditing: SightAnnotation?
@@ -29,6 +29,7 @@ class EditSightViewController: UIViewController, UIImagePickerControllerDelegate
         let descriptionRegex = "^[a-zA-Z0-9]+[.!,‘’']?[a-z]?( [a-zA-Z0-9]+[.!,‘’']?[a-z]?)*$"
         let descriptionTest = NSPredicate(format:"SELF MATCHES %@", descriptionRegex)
         if descriptionTest.evaluate(with: self.sightDescription.text) {
+            //makes changes to annotations subtitle property and persists it. Code understood and implemented from this tutorial here: https://cocoacasts.com/reading-and-updating-managed-objects-with-core-data
             sightForEditing!.setValue(sightDescription.text!, forKey: "subtitle")
             databaseController?.saveEditSightChanges()
             navigationController?.popToRootViewController(animated: true)

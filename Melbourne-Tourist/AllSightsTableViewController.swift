@@ -8,14 +8,18 @@
 
 import UIKit
 
+//most of the code in this view controller is from tutorials. Image resizing code snippet is from stackoverflow.
 class AllSightsTableViewController: UITableViewController, UISearchResultsUpdating, DatabaseListener {
     
     //var homeViewController: HomeViewController?
     var allSights = [SightAnnotation]()
     var filteredSights = [SightAnnotation]()
     weak var databaseController: DatabaseProtocol?
+    //delegate to pass annotation to focus on mapview once a selection is made in table view
     var focusOnDelegate: FocusOnAnnotationDelegate?
+    //delegate to pass annotation fo which geofencing has to be removed
     var regionMonitoringDelegate: RegionMonitoringDelegate?
+    //boolean used in sorting tableview
     var flag = true
     
     override func viewDidLoad() {
@@ -35,6 +39,7 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
         definesPresentationContext = true // ensure that the search bar does not remain on the screen if the user navigates to another view controller while the UISearchController is active.
     }
     
+    //sorts table view in both ascending and descending
     @IBAction func sortButton(_ sender: Any) {
         if !flag {
             filteredSights.sort(by: { $0.title! < $1.title! })
@@ -46,6 +51,7 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
             tableView.reloadData()
         }
     }
+    
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text?.lowercased(), searchText.count > 0 {
             filteredSights = allSights.filter({(sight: SightAnnotation) -> Bool in
@@ -57,16 +63,11 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
         tableView.reloadData()
     }
 
-
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return filteredSights.count
     }
 
@@ -79,11 +80,13 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
         cell.detailTextLabel!.text = sight.subtitle
         let cellViewImage: UIImage
         let imageName = sight.imageName!
+        // if image name has UUID then fetches filepath
         if imageName.count != 36 {
             cellViewImage =  UIImage(named: imageName)!
         } else {
             cellViewImage = loadImageData(fileName: imageName)!
             }
+        //fixes image size for display in table view cell. Code taken from stackoverflow
         let size = CGSize(width: 100, height: 50)
         UIGraphicsBeginImageContext(size)
         cellViewImage.draw(in: CGRect(x:0, y:0, width: size.width, height: size.height))
@@ -114,66 +117,18 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
         updateSearchResults(for: navigationItem.searchController!)
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            regionMonitoringDelegate?.regionToBeRemoved(annotation: filteredSights[indexPath.row])
+            regionMonitoringDelegate?.geofenceToBeRemoved(annotation: filteredSights[indexPath.row])
             databaseController?.deleteSightAnnotation(sight: filteredSights[indexPath.row])
-        }/*
-        else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
-         */
+ 
     }
-    
-  
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
-    // MARK: - Navigation
-
-    /*
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "focusOnSightSegue" {
-            let controller = segue.destination as! HomeViewController
-            //controller.delegate = self
-            let selectionIndexPath = tableView.indexPathsForSelectedRows?.first
-            //controller.focusOn(annotation: self.sights[selectionIndexPath!.row])
-            controller.annotation = self.filteredSights[selectionIndexPath!.row]
-        }
-    }
-     */
-    
-    
-    
-
 }
-
+//made this a global function to be used by multiple view controllers
 func loadImageData(fileName: String) -> UIImage? {
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
     let url = NSURL(fileURLWithPath: path)

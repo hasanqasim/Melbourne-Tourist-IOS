@@ -9,6 +9,7 @@
 import Foundation
 import MapKit
 
+//geofence to be removed takes a sight annotation and removes its associated geofence
 protocol RegionMonitoringDelegate: AnyObject {
-    func regionToBeRemoved (annotation: SightAnnotation)
+    func geofenceToBeRemoved (annotation: SightAnnotation)
 }

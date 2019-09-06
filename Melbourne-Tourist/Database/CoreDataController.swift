@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+//core data controller implemenattion is very similar to the one shown in core data's lab. All functions werer adjusted to conform to current application data model.
 class CoreDataController: NSObject, NSFetchedResultsControllerDelegate, DatabaseProtocol {
     
     var listeners = MulticastDelegate<DatabaseListener>()

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+//database protocol similar to core data's lab done in class. Changes made to match current core data model requirements
 enum DatabaseChange {
     case add
     case remove

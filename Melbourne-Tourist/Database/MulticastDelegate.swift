@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+//code copy pasted from core data lab week 4 tutorial
 class MulticastDelegate <T> {
     private var delegates = Set<WeakObjectWrapper>()
     func addDelegate(_ delegate: T) {

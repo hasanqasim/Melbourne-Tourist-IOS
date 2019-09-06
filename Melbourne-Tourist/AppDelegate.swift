@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 import UserNotifications
-
+//app delegate takes care of the geofencing for this application. Both in appliocation notifications and local background notificaytions for geofence entry are dealt with here.
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -19,9 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        //UI Customisation Code
+        //UI Customisation Code from UI lecture
         let uiNavbarProxy = UINavigationBar.appearance()
         uiNavbarProxy.barTintColor = UIColor(red: 0.7, green: 0.2, blue: 0.31, alpha: 1.0)
         uiNavbarProxy.tintColor = UIColor.white
@@ -58,7 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
-
+    
+    //removes existing pending notifications. Code taken from raywenderlich's tutorial on geofencing: https://www.raywenderlich.com/5470-geofencing-with-core-location-getting-started#toc-anchor-005
     func applicationDidBecomeActive(_ application: UIApplication) {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
@@ -71,6 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //geofence event handler
 }
 
+//This extension chekc sif app is running in background or foreground to decide what type of notification to trigger. Sends an in application alert if geofence entry triggered while app is running otherwise sends a background local notification. Code taken from raywenderlich's tutorial on geofencing cited above.
 extension AppDelegate: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         if region is CLCircularRegion {

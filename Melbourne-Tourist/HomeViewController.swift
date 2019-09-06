@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 
+//most of the code in this view controller is from tutorials, some of it is from mapkit tutorial on hacking with swift.
 class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, DatabaseListener,FocusOnAnnotationDelegate, RegionMonitoringDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
@@ -41,17 +42,18 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         }
     }
     
-    func regionToBeRemoved (annotation: SightAnnotation) {
+    //delegate method that removes geofence for deleted sight location
+    func geofenceToBeRemoved (annotation: SightAnnotation) {
         let region = CLCircularRegion(center: annotation.coordinate, radius: 300, identifier: annotation.title!)
         locationManager.stopMonitoring(for: region)
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         databaseController?.addListener(listener: self)
         mapView.addAnnotations(sightList)
         locationManager.startUpdatingLocation()
-        mapView.addAnnotations(sightList)
         startMonitoringForGeofence()
     }
     
@@ -63,9 +65,9 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     
     func onSightListChange(change: DatabaseChange, sights: [SightAnnotation]) {
         sightList = sights
-        //view.setNeedsDisplay()
     }
     
+    //keeps a track of user location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last!
         currentLocation = location.coordinate
@@ -78,14 +80,13 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     }
     
     func focusOn(annotation: MKAnnotation) {
-        //mapView.selectAnnotation(annotation, animated: true) // Selects the specified annotation and displays a callout view for it
         // A rectangular geographic region centered around a specefic latitude and longitude
         let zoomRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         // Changes the current visible region
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true) // adjusts aspect ratio of the specified region to ensure that it fits map view's frame
-        
     }
     
+    //customise annotation view with callout. Code reference from hacking with swift mapkit project: https://www.hackingwithswift.com/read/16/2/up-and-running-with-mapkit
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard annotation is SightAnnotation else {
             return nil
@@ -117,6 +118,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         return annotationView
     }
     
+    // creates a segue way from annotation callout to detail view screen. Code referenced from the same MapKit Hacking with swif mapkit tutorial
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         guard let sight = view.annotation as? SightAnnotation else {
             return

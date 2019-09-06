@@ -8,7 +8,7 @@
 
 import Foundation
 import MapKit
-
+//focus on takes an annotation and focus on it in the mapview
 protocol FocusOnAnnotationDelegate: AnyObject {
     func focusOn(annotation: MKAnnotation)
 }

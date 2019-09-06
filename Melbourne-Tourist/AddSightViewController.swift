@@ -19,13 +19,17 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBOutlet weak var addSightBtn: UIButton!
     @IBOutlet weak var viewSightBtn: UIButton!
+    //variable for the image that the user takes from camera or photo gallery
     var imageName = ""
     weak var databaseController: DatabaseProtocol?
+    //coordinate variable used to store coordinates of the location address string that user inputs
     var newSightCoordinates = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    //delegate used to focus on sight annotation on mapview after user successfully adds it
     var focusOnAnnotationDelegate: FocusOnAnnotationDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //modify button background color. Code taken from stackoverflow.
         addSightBtn.backgroundColor = UIColor(red: 0.7, green: 0.2, blue: 0.31, alpha: 1.0)
         viewSightBtn.backgroundColor = UIColor(red: 0.7, green: 0.2, blue: 0.31, alpha: 1.0)
         // Get the database controller once from the App Delegate
@@ -47,6 +51,7 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
         
     }
     
+    //Save image ame as UUID. Code inspiration from hacking with swifts tutorial on ImagePickerController tutorial: https://www.hackingwithswift.com/read/10/4/importing-photos-with-uiimagepickercontroller
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         //extract image from dictionary that is passed as a parameter
         guard let image = info[.originalImage] as? UIImage else {
@@ -74,21 +79,13 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
         displayMessage(title: "Success", message: "Image Capture Successful!")
     }
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     @IBAction func viewSight(_ sender: Any) {
+        //add screen has a mapview for users to check if the address string they entered matches with location on map. method uses geocoding to convert address string to coordinates. Code taken from apple developer documentation: https://developer.apple.com/documentation/corelocation/converting_between_coordinates_and_user-friendly_place_names
         showNewSightOnMap(address : sightAddress.text!)
-        
     }
+    // method extensively validates users input, adds new sight and persists it to application. Regex validation done using helper code from medium and stackoverflow: https://medium.com/@vinayganeshh/regex-and-smart-punctuation-in-ios-f36deb3503e https://stackoverflow.com/questions/15472764/regular-expression-to-allow-spaces-between-words
+    // method also does geocoding using code from apple documentation - same link as above
     @IBAction func addSight(_ sender: Any) {
         if sightName.text!.count != 0 && sightDescription.text!.count != 0 && sightAddress.text!.count != 0 && imageName != ""{
             let nameRegex = "^[a-zA-Z]+( [a-zA-Z]+)*$"
@@ -125,7 +122,7 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
         if !NSPredicate(format:"SELF MATCHES %@", "^[a-zA-Z]+( [a-zA-Z]+)*$").evaluate(with: sightName.text) {
             displayMessage(title: "Error", message: "Must provide a Valid Name. Name cannot have digits or punctuations!")
         }
-        
+
         if sightDescription.text!.isEmpty {
             displayMessage(title: "Error", message: "Must provide a Description!")
         }
@@ -141,10 +138,9 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
         if imageName == "" {
             displayMessage(title: "Error", message: "Must provide an Image")
         }
-
-       
     }
     
+    //method to show users address on map for verification. Uses geocoding to convert address to coordinates
     func showNewSightOnMap(address : String) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarks, error) in
@@ -165,31 +161,10 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
                 } else {
                     self.displayMessage(title: "ERROR", message: "invalid Street Address")
                 }
-                
             }
         }
-        
     }
-    /*
-    func getCoordinates(address : String) {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(address) { (placemarks, error) in
-            if error == nil {
-                if let placemark = placemarks?[0] {
-                    self.newSightCoordinates.latitude = round(10000*placemark.location!.coordinate.latitude)/10000
-                    self.newSightCoordinates.longitude = round(10000*placemark.location!.coordinate.longitude)/10000
-                    return
-                }
-            } else {
-                self.displayMessage(title: "ERROR", message: "invalid address")
-                
-            }
-        }
-
-    }
-    */
-    
-    
+   
     func displayMessage(title: String, message: String) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
