@@ -17,6 +17,8 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var iconSegmentedControl: UISegmentedControl!
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var addSightBtn: UIButton!
+    @IBOutlet weak var viewSightBtn: UIButton!
     var imageName = ""
     weak var databaseController: DatabaseProtocol?
     var newSightCoordinates = CLLocationCoordinate2D(latitude: 0, longitude: 0)
@@ -24,7 +26,8 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        addSightBtn.backgroundColor = UIColor(red: 0.7, green: 0.2, blue: 0.31, alpha: 1.0)
+        viewSightBtn.backgroundColor = UIColor(red: 0.7, green: 0.2, blue: 0.31, alpha: 1.0)
         // Get the database controller once from the App Delegate
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
@@ -89,22 +92,30 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func addSight(_ sender: Any) {
         if sightName.text!.count != 0 && sightDescription.text!.count != 0 && sightAddress.text!.count != 0 && imageName != ""{
             let nameRegex = "^[a-zA-Z]+( [a-zA-Z]+)*$"
-            let descriptionRegex = "^[a-zA-Z]+( [a-zA-Z]+[.!,]?)*$"
+            let descriptionRegex = "^[a-zA-Z0-9]+[.!,‘’']?[a-z]?( [a-zA-Z0-9]+[.!,‘’']?[a-z]?)*$"
             let nameTest = NSPredicate(format:"SELF MATCHES %@", nameRegex)
             let descriptionTest = NSPredicate(format:"SELF MATCHES %@", descriptionRegex)
             let address = sightAddress.text!
-            getCoordinates(address: address)
-            
-            if nameTest.evaluate(with: sightName.text) && descriptionTest.evaluate(with: sightDescription.text) && newSightCoordinates.latitude != 0 {
-                let name = sightName.text!
-                let description = sightDescription.text!
-                let iconType = iconSegmentedControl.titleForSegment(at: iconSegmentedControl.selectedSegmentIndex)!
-                let sight = databaseController!.addSightAnnotation(title: name, subtitle: description, latitude: newSightCoordinates.latitude, longitude: newSightCoordinates.longitude, iconType: iconType, imageName: imageName)
-                navigationController?.popViewController(animated: true)
-                focusOnAnnotationDelegate?.focusOn(annotation: sight)
-                
+            let geocoder = CLGeocoder()
+            geocoder.geocodeAddressString(address) { (placemarks, error) in
+                if error == nil {
+                    if let placemark = placemarks?[0] {
+                        self.newSightCoordinates.latitude = round(10000*placemark.location!.coordinate.latitude)/10000
+                        self.newSightCoordinates.longitude = round(10000*placemark.location!.coordinate.longitude)/10000
+                        if nameTest.evaluate(with: self.sightName.text) && descriptionTest.evaluate(with: self.sightDescription.text) && self.newSightCoordinates.latitude != 0 {
+                            let name = self.sightName.text!
+                            let description = self.sightDescription.text!
+                            let iconType = self.iconSegmentedControl.titleForSegment(at: self.iconSegmentedControl.selectedSegmentIndex)!
+                            let sight = self.databaseController!.addSightAnnotation(title: name, subtitle: description, latitude: self.newSightCoordinates.latitude, longitude: self.newSightCoordinates.longitude, iconType: iconType, imageName: self.imageName)
+                            self.navigationController?.popViewController(animated: true)
+                            self.focusOnAnnotationDelegate?.focusOn(annotation: sight)
+                            return
+                        }
+                    }
+                } else {
+                    self.displayMessage(title: "ERROR", message: "Invalid Street Address")
+                }
             }
-           
         }
         
         if sightName.text!.isEmpty {
@@ -112,14 +123,14 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         
         if !NSPredicate(format:"SELF MATCHES %@", "^[a-zA-Z]+( [a-zA-Z]+)*$").evaluate(with: sightName.text) {
-            displayMessage(title: "Error", message: "Must provide a Valid Name")
+            displayMessage(title: "Error", message: "Must provide a Valid Name. Name cannot have digits or punctuations!")
         }
         
         if sightDescription.text!.isEmpty {
             displayMessage(title: "Error", message: "Must provide a Description!")
         }
         
-        if !NSPredicate(format:"SELF MATCHES %@", "^[a-zA-Z]+( [a-zA-Z]+[.,!]?)*$").evaluate(with: sightDescription.text) {
+        if !NSPredicate(format:"SELF MATCHES %@", "^[a-zA-Z0-9]+[.!,‘’']?[a-z]?( [a-zA-Z0-9]+[.,!‘’']?[a-z]?)*$").evaluate(with: sightDescription.text) {
             displayMessage(title: "Error", message: "Must provide a Valid Description")
         }
             
@@ -142,6 +153,7 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
                     let location = placemark.location!
                     let sight = MKPointAnnotation()
                     sight.coordinate = CLLocationCoordinate2D(latitude: round(10000*location.coordinate.latitude)/10000, longitude: round(10000*location.coordinate.longitude)/10000)
+                    self.mapView.removeAnnotation(sight)
                     self.mapView.addAnnotation(sight)
                     let zoomRegion = MKCoordinateRegion(center: sight.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
                     self.mapView.setRegion(self.mapView.regionThatFits(zoomRegion), animated: true)
@@ -158,7 +170,7 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         
     }
-    
+    /*
     func getCoordinates(address : String) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarks, error) in
@@ -175,7 +187,7 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
         }
 
     }
-    
+    */
     
     
     func displayMessage(title: String, message: String) {

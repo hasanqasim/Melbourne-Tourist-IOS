@@ -6,17 +6,109 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Melbourne-Tourist/AddSightViewController.swift"
-            timestampString = "589412253.457693"
+            filePath = "Melbourne-Tourist/SightDetailViewController.swift"
+            timestampString = "589455863.266046"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "viewSight(_:)"
-            landmarkType = "7">
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "SightDetailViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Melbourne_Tourist.SightDetailViewController.imageView.getter : Swift.Optional&lt;__C.UIImageView&gt;"
+                  moduleName = "Melbourne-Tourist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hasanqasim/Documents/advanced-mobile-systems/Melbourne-Tourist/Melbourne-Tourist/SightDetailViewController.swift"
+                  timestampString = "589446998.3000849"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "86">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Melbourne_Tourist.SightDetailViewController.imageView.setter : Swift.Optional&lt;__C.UIImageView&gt;"
+                  moduleName = "Melbourne-Tourist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hasanqasim/Documents/advanced-mobile-systems/Melbourne-Tourist/Melbourne-Tourist/SightDetailViewController.swift"
+                  timestampString = "589446998.304566"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "106">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Melbourne_Tourist.SightDetailViewController.imageView.modify : Swift.Optional&lt;__C.UIImageView&gt;"
+                  moduleName = "Melbourne-Tourist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hasanqasim/Documents/advanced-mobile-systems/Melbourne-Tourist/Melbourne-Tourist/SightDetailViewController.swift"
+                  timestampString = "589446998.308573"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "69">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Melbourne_Tourist.SightDetailViewController.imageView.modify : Swift.Optional&lt;__C.UIImageView&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Melbourne-Tourist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hasanqasim/Documents/advanced-mobile-systems/Melbourne-Tourist/Melbourne-Tourist/SightDetailViewController.swift"
+                  timestampString = "589446998.311166"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Melbourne_Tourist.SightDetailViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Melbourne_Tourist.SightDetailViewController"
+                  moduleName = "Melbourne-Tourist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hasanqasim/Documents/advanced-mobile-systems/Melbourne-Tourist/Melbourne-Tourist/SightDetailViewController.swift"
+                  timestampString = "589446998.313432"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "302">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Melbourne_Tourist.SightDetailViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Melbourne_Tourist.SightDetailViewController&gt;"
+                  moduleName = "Melbourne-Tourist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hasanqasim/Documents/advanced-mobile-systems/Melbourne-Tourist/Melbourne-Tourist/SightDetailViewController.swift"
+                  timestampString = "589446998.315251"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "222">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -9,6 +9,6 @@
 import Foundation
 import MapKit
 
-protocol FocusOnAnnotationDelegate {
+protocol FocusOnAnnotationDelegate: AnyObject {
     func focusOn(annotation: MKAnnotation)
 }

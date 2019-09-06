@@ -16,8 +16,8 @@ class SightDetailViewController: UIViewController {
     var sight: SightAnnotation?
 
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var textView: UITextView!
-    
+    @IBOutlet weak var titleTextView: UITextView!
+    @IBOutlet weak var subtitleTextView: UITextView!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var locationTextView: UITextView!
     
@@ -25,7 +25,7 @@ class SightDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationItem.title = sight?.title
+        titleTextView.text = sight?.title
         if let image = sight?.imageName {
             if image.count != 36 {
                 imageView.image =  UIImage(named: image)
@@ -35,7 +35,7 @@ class SightDetailViewController: UIViewController {
             }
         }
         if let subtitle = sight?.subtitle {
-            textView.text = "\(subtitle)"
+            subtitleTextView.text = "\(subtitle)"
         }
         
         reverseGeocode()

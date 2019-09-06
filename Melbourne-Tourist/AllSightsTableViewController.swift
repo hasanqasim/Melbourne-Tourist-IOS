@@ -8,15 +8,22 @@
 
 import UIKit
 
-class AllSightsTableViewController: UITableViewController, UISearchResultsUpdating {
+class AllSightsTableViewController: UITableViewController, UISearchResultsUpdating, DatabaseListener {
     
     //var homeViewController: HomeViewController?
     var allSights = [SightAnnotation]()
     var filteredSights = [SightAnnotation]()
+    weak var databaseController: DatabaseProtocol?
     var focusOnDelegate: FocusOnAnnotationDelegate?
+    var regionMonitoringDelegate: RegionMonitoringDelegate?
+    var flag = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Get the database controller once from the App Delegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
 
         filteredSights = allSights
         
@@ -28,6 +35,17 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
         definesPresentationContext = true // ensure that the search bar does not remain on the screen if the user navigates to another view controller while the UISearchController is active.
     }
     
+    @IBAction func sortButton(_ sender: Any) {
+        if !flag {
+            filteredSights.sort(by: { $0.title! < $1.title! })
+            flag = true
+            tableView.reloadData()
+        } else {
+            filteredSights.sort(by: { $0.title! > $1.title! })
+            flag = false
+            tableView.reloadData()
+        }
+    }
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text?.lowercased(), searchText.count > 0 {
             filteredSights = allSights.filter({(sight: SightAnnotation) -> Bool in
@@ -60,7 +78,7 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
         cell.textLabel!.text = sight.title
         cell.detailTextLabel!.text = sight.subtitle
         let cellViewImage: UIImage
-        let imageName = sight.imageName
+        let imageName = sight.imageName!
         if imageName.count != 36 {
             cellViewImage =  UIImage(named: imageName)!
         } else {
@@ -81,8 +99,20 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
         focusOnDelegate?.focusOn(annotation: filteredSights[indexPath.row])
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
+    }
     
+    func onSightListChange(change: DatabaseChange, sights: [SightAnnotation]) {
+        allSights = sights
+        updateSearchResults(for: navigationItem.searchController!)
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -97,9 +127,8 @@ class AllSightsTableViewController: UITableViewController, UISearchResultsUpdati
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            allSights.remove(at: indexPath.row)
-            filteredSights = allSights
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            regionMonitoringDelegate?.regionToBeRemoved(annotation: filteredSights[indexPath.row])
+            databaseController?.deleteSightAnnotation(sight: filteredSights[indexPath.row])
         }/*
         else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

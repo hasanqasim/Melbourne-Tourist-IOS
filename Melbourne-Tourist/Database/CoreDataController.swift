@@ -16,7 +16,7 @@ class CoreDataController: NSObject, NSFetchedResultsControllerDelegate, Database
     var allSightsFetchedResultsController: NSFetchedResultsController<SightAnnotation>?
     
     override init() {
-        persistentContainer = NSPersistentContainer(name: "MelbouneTourist")
+        persistentContainer = NSPersistentContainer(name: "MelbourneTourist")
         persistentContainer.loadPersistentStores() { (description, error) in
             if let error = error {
                 fatalError("Failed to load Core Data stack: \(error)")

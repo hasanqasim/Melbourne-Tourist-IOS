@@ -9,9 +9,10 @@
 import UIKit
 import MapKit
 
-class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, DatabaseListener,FocusOnAnnotationDelegate {
+class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, DatabaseListener,FocusOnAnnotationDelegate, RegionMonitoringDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var viewAllSightsBtn: UIButton!
     
     var sightList = [SightAnnotation]()
     weak var databaseController: DatabaseProtocol?
@@ -20,21 +21,17 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        viewAllSightsBtn.backgroundColor = UIColor(red: 0.7, green: 0.2, blue: 0.31, alpha: 1.0)
         // Get the database controller once from the App Delegate
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
-        databaseController?.addListener(listener: self)
-        
         loadInitialLocation()
        
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = 100
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
-        startMonitoringForGeofence()
     }
-    
     
     func startMonitoringForGeofence() {
         for location in sightList {
@@ -44,15 +41,29 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        locationManager.startUpdatingLocation()
+    func regionToBeRemoved (annotation: SightAnnotation) {
+        let region = CLCircularRegion(center: annotation.coordinate, radius: 300, identifier: annotation.title!)
+        locationManager.stopMonitoring(for: region)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+        mapView.addAnnotations(sightList)
+        locationManager.startUpdatingLocation()
+        mapView.addAnnotations(sightList)
+        startMonitoringForGeofence()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         databaseController?.removeListener(listener: self)
         locationManager.stopUpdatingLocation()
+    }
+    
+    func onSightListChange(change: DatabaseChange, sights: [SightAnnotation]) {
+        sightList = sights
+        //view.setNeedsDisplay()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -121,6 +132,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             let destination = segue.destination as! AllSightsTableViewController
             destination.allSights = sightList
             destination.focusOnDelegate = self
+            destination.regionMonitoringDelegate = self
         }
         
         if segue.identifier == "sightDetailViewSegue" {
