@@ -1,6 +1,6 @@
 # Melbourne-Tourist-IOS
 
-### My firts complex iOS Application implementation
+### My fist complex iOS Application implementation
 
 ### Location-aware application that serves as an aid for tourists interested in Melbourne City’s historical sights. 
 ### Users are able to view information on the various historical locations throughout Melbourne’s CBD that have locations associated with them. 
